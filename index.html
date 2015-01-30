@@ -1,0 +1,201 @@
+<!--TO DO: 
+	DATA: 1) API for filters 2) autopopulate filter menus 3) Finish line graph section
+			5) Stats stuff...What are the best statistics to show? contingency table?  Basic correlation? 
+				What are the best visualizations?  heatmap the contingency table?
+					What are the best defaults?
+	INTERACTION: 1) tool tip function propperly 2) Filter button changes graph on click 3) highlight line on hover 
+					4) Fix tooltip to line instead of mouse x position 
+					5) button changes color based on change to filters 5) filter animation?
+	STYLE: 1) padding between line graph and filters
+				2) Box around tooltip 3) filter button below filters with padding
+-->
+<meta charset="utf-8">
+<title>Credit Card Complaints Received by the CFPB</title>
+
+<link href="css/bootstrap.min.css" rel="stylesheet">
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
+</head>
+
+<body>
+	<div class="container-fluid">
+	
+	<div class='container' align='center'>
+		<h2>Credit Card Complaints Received by the CFPB</h2>
+	</div>
+	<!--create filter choices.-->
+	<div id='container-fluid' align='center'>
+		<button type="button" class="btn btn-primary">Filter</button>
+		<h3><small>use ctrl/cmd for multiple selections</small></h3>
+	</div>
+	<div id='filters' class='container' align='left'>
+		<div class="row">
+			<div class="form-group">
+				<div class="col-md-2"> 
+				<b id='bold'> Bank </b>
+			
+			<select multiple name="Bank" align='right' class="form-control">
+				<option vlaue="All" selected>All</option>
+				<option vlaue="SIFI" selected>SIFI</option>
+  				<option value="non-SIFI" selected>non-SIFI</option>
+  				<option value="Amex"> Amex </option>
+  				<option value="Atlanticus Services Corporation"> Atlanticus Services Corporation </option>
+  				<option value="Bank of America">Bank of America</option>
+  				<option value="Barclays"> Barclays </option>
+  				<option value="BB&T Financial"> BB&T Financial </option>
+  				<option value="BMO Harris"> BMO Harris </option>
+  				<option value="Capitol One"> Capitol One </option>
+  				<option value="Citibank"> Citibank </option>
+  				<option value="Comerica"> Comerica </option>
+  				<option value="Discover"> Discover </option>
+  				<option value="Expert Global Solutions"> Expert Global Solutions </option>
+  				<option value="Fifth Third Bank"> Fifth Third Bank </option>
+  				<option value="First National Bank of Omaha"> First National Bank of Omaha </option>
+  				<option value="GE Capital Retail"> GE Capital Retail </option>
+  				<option value="HSBC"> HSBC </option>
+  				<option value="JPMorgan Chase">JPMorgan Chase</option>
+  				<option value="KeyBank NA"> KeyBank NA </option>
+  				<option value="Navy FCU"> Navy FCU </option>
+  				<option value="Pentagon FCU"> Pentagon FCU </option>
+  				<option value="PNC Bank"> PNC Bank </option>
+  				<option value="SquareTwo Financial Corporation"> SquareTwo Financial Corporation </option>
+  				<option value="State Farm Bank"> State Farm Bank </option>
+  				<option value="TD Bank"> TD Bank </option>
+  				<option value="U.S. Bancorp"> U.S. Bancorp </option>
+  				<option value="United Recovery Systems, LP"> United Recovery Systems, LP </option>
+  				<option value="Wells Fargo"> Wells Fargo</option>
+  				<option value="Weltman, Weinberg & Reis"> Weltman, Weinberg & Reis </option>
+			</select>
+			</div>
+			<div class="col-md-2">
+				<b> Issue </b>
+				<select multiple name="Issue" class="form-control">
+					<!--autopopulate-->
+					<option value="All" selected> All </option>
+					<option value="a and m">Advertising and Marketing</option>
+					<option value="app delay">Application Processing Delay</option>
+					<option value="APR or int">APR or Interest Rate</option>
+					<option value="Balance Transfer">Balance Transfer</option>
+					<option value="Balance Transfer Fee">Balance Transfer Fee</option>
+					<option value="Billing Disputes">Billing Disputes</option>
+					<option value="Billing Statement">Billing Statement</option>
+					<option value="Cash Advance">Cash Advance</option>
+					<option value="Closing/Canceling Account">Closing/Canceling Account</option>
+					<option value="Collection Debt Dispute">Collection Debt Dispute</option>
+					<option value="Collection Practices">Collection Practices</option>
+					<option value="Credit Card Protection/Debt Protection">Credit Card
+										Protection/Debt Protection</option>
+					<option value="Credit Determination">Credit Determination</option>
+					<option value="Credit Line Increase/Decrease">
+									Credit Line Increase/Decrease</option>
+					<option value="Credit Reporting">Credit Reporting</option>
+					<option value="Customer Service/ Customer Relations">Customer Service/
+										Customer Relations</option>
+					<option value="Delinquent Account">Delinquent Account</option>
+					<option value="Forbearance/Workout Plans">Forbearance/Workout Plans</option>
+					<option value="Identity Theft/ Fraud/ Embezzlement">Identity Theft/ 
+								Fraud/ Embezzlement</option>
+					<option value="Late Fee">Late Fee</option>
+					<option value="Other">Other</option>
+					<option value="Other Fee">Other Fee</option>
+					<option value="Overlimit Fee">Overlimit Fee</option>
+					<option value="Payoff Process">Payoff Process</option>
+					<option value="Privacy">Privacy</option>
+					<option value="Rewards">Rewards</option>
+					<option value="Sale of Account">Sale of Account</option>
+					<option value="Transaction Issue">Transaction Issue</option>
+					<option value="Unsolicited Issuance of Credit Card">Unsolicited 
+											Issuance of Credit Card</option>
+		
+				</select>
+			</div>
+			<div class="col-md-2">
+				<b> State </b>
+				<select multiple name="Zip Code" class="form-control"><!--can I auto fill this/all menues from data?-->
+					<!--autopopulate-->
+					<option value="All" selected> All </option>
+					<option value="AL"> Alabama </option>
+					<option value="AK"> Alaska </option>
+					<option value="AZ"> Arizona </option>
+				</select>
+			</div>
+			<div class="col-md-2">
+				<b> Company Response </b>
+				<select multiple name="Company Response" class="form-control">
+					<!--autopopulate-->
+					<option value="All" selected> All </option>
+					<option value="Closed"> Closed </option>
+					<option value="Closed with Explanation"> Closed with Explanation </option>
+					<option value="Closed with Monetary Relief"> Closed with Monetary Relief</option>
+					<option value="Closed with non-Monetary Relief"> Closed with non-Monetary Relief</option>
+					<option value="Closed with Relief"> Closed with Relief</option>
+					<option value="Closed without Relief"> Closed without Relief</option>
+					<option value="In Progress"> In Progress </option>
+					<option value="Untimely Response"> Untimely Response </option>
+				</select>
+			</div>
+			<div class="col-md-2">
+				<b> Timely Response</b>
+				<select multiple name="Timely Response" class="form-control">
+					<!--autopopulate-->
+					<option value="All" selected> All </option>
+					<option value="Yes"> Yes </option>
+					<option value="No"> No </option>
+				</select>
+			</div>
+			<div class="col-md-2">
+				<b> Consumer Disputed</b>
+				<select multiple name="Consumer Disputed" class="form-control">
+					<!--autopopulate-->
+					<option value="All" selected> All </option>
+					<option value="Yes"> Yes </option>
+					<option value="No"> No </option>
+					<option value=" "> Open </option>
+				</select>
+			</div>
+		</div>
+		</div>
+	</div>
+	</div>
+	<div id="lineChart"></div>
+		<script src="http://d3js.org/d3.v3.js"></script>
+		<script src="script.js"></script>
+	</div>
+</body>
+<style>
+/* 
+
+body {
+  font: 12px "arial black";
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.x.axis path {
+  display: none;
+}
+
+.line {
+  fill: none;
+  stroke: green;
+  stroke-width: 3px;
+}
+
+#filters ul li {
+display: inline;
+}
+
+#bold {
+text-align: ;
+}
+ */
+
+</style>
+
